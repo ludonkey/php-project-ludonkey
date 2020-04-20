@@ -1,0 +1,50 @@
+.btn-primary,
+.bg-primary {
+    background-color: teal !important;
+    border-color: teal !important;
+}
+
+.card-block {
+    margin-bottom: 30px;
+}
+
+#signup-btn {
+    background-color: #e83e8c;
+    border-color: transparent;
+}
+
+.lg-cpp {
+    background-color: #ffc107;
+}
+
+.lg-php {
+    background-color: #6f42c1;
+}
+
+.lg-python {
+    background-color: #17a2b8;
+}
+
+.lg-js {
+    background-color: #fd7e14;
+}
+
+.lg-java {
+    background-color: #28a745;
+}
+
+.lg-csharp {
+    background-color: #6610f2;
+}
+
+.lg-sh {
+    background-color: #6c757d;
+}
+
+.lg-ts {
+    background-color: #007bff;
+}
+
+.lg-sql {
+    background-color: #343a40;
+}
