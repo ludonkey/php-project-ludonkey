@@ -8,6 +8,32 @@
     margin-bottom: 30px;
 }
 
+.card {
+    border-radius: 0.5rem;
+    background-color: #212529;
+}
+
+body {
+    color: #eeeeee;
+}
+
+footer a {
+    color: #e83e8c;
+}
+
+.blockquote-footer {
+    color: #e83e8c;
+}
+
+.card-text {
+    margin-bottom: 0px;
+}
+
+.hljs {
+    background-color: transparent;
+    overflow: hidden;
+}
+
 #signup-btn {
     background-color: #e83e8c;
     border-color: transparent;
