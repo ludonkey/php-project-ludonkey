@@ -23,7 +23,7 @@
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
-                <form class="form-inline my-2 my-md-0" action="/search" id="search-form">
+                <form class="form-inline my-2 my-md-0" action="/" id="search-form">
                     <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
                 </form>
                 <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="login-btn">Log in</a>
