@@ -10,7 +10,36 @@
 
 .card {
     border-radius: 0.5rem;
-    background-color: #212529;
+    background-color: #3d4145;
+}
+
+.card-title {
+    border-bottom: 1px solid #414448;
+    background-color: #36393c;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    line-height: 37px;
+    overflow: hidden;
+    word-break: break-word;
+    border-radius: 0.5rem;
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    height: 43px;
+}
+
+.card-body {
+    padding-top: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+
+.card-body pre {
+    width: 100%;
 }
 
 body {
@@ -32,6 +61,31 @@ footer a {
 .hljs {
     background-color: transparent;
     overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.card-text,
+.blockquote-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-cpy {
+    margin-left: 20px;
+}
+
+.card-body pre {
+    margin-bottom: 0px;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 1rem;
+    margin-left: 40px;
+    margin-right: 40px;
+    border: 0;
+    border-top: 2px solid #515458;
 }
 
 #signup-btn {
@@ -72,5 +126,5 @@ footer a {
 }
 
 .lg-sql {
-    background-color: #343a40;
+    background-color: #454b51;
 }
