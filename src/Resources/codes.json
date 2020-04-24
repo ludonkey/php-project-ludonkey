@@ -1,0 +1,136 @@
+[{
+    "id": 1,
+    "title": "Hello World",
+    "content": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}",
+    "description": "The famous Helloworld in C++.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 1,
+        "name": "cpp"
+    },
+    "user": {
+        "id": 1,
+        "nickname": "ludk",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 2,
+    "title": "Foreach Loop",
+    "content": "<?php\n\nforeach ($array as $key => $value) {\n    echo \"$key : $value.\\n\";\n}",
+    "description": "A simple foreach example.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 2,
+        "name": "php"
+    },
+    "user": {
+        "id": 2,
+        "nickname": "someone",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 3,
+    "title": "Check os version",
+    "content": "$ cat /etc/os-release",
+    "description": "The easy way to check you os version.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 3,
+        "name": "sh"
+    },
+    "user": {
+        "id": 3,
+        "nickname": "linn489",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 4,
+    "title": "Bubble Sort",
+    "content": "def bubbleSort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-i-1):\n            if arr[j] > arr[j+1] :\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr",
+    "description": "Implementation of Bubble Sort - O(n²).",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 4,
+        "name": "py"
+    },
+    "user": {
+        "id": 4,
+        "nickname": "neo7114",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 5,
+    "title": "Async function",
+    "content": "function delayedFunction() {\n    alert('Hello');\n}\nsetTimeout(delayedFunction, 3000);",
+    "description": "A delayed call in javascript.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 5,
+        "name": "js"
+    },
+    "user": {
+        "id": 5,
+        "nickname": "jsman",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 6,
+    "title": "Interface definition",
+    "content": "interface Person {\n    fullName: string;\n    toString();\n}",
+    "description": "Simple interface definition.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 6,
+        "name": "ts"
+    },
+    "user": {
+        "id": 6,
+        "nickname": "roxxx8",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 7,
+    "title": "Simple Thread",
+    "content": "public class MyThread extends Thread {\n    public void run(){\n        System.out.println(\"MyThread running\");\n    }\n}\n    \nMyThread myThread = new MyThread();\nmyTread.start();",
+    "description": "A basic thread implementation.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 7,
+        "name": "java"
+    },
+    "user": {
+        "id": 7,
+        "nickname": "javabien",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 8,
+    "title": "Properties definition",
+    "content": "public class SaleItem\n{\n   public string Name { get; set; }\n   public decimal Price { get; set; }\n}",
+    "description": "How to define properties.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 8,
+        "name": "cs"
+    },
+    "user": {
+        "id": 8,
+        "nickname": "skraken",
+        "password": "aaaaaaaa"
+    }
+}, {
+    "id": 9,
+    "title": "Group by Query",
+    "content": "SELECT SUBJECT, YEAR, Count(*)\nFROM Student\nGROUP BY SUBJECT, YEAR;",
+    "description": "Group by example.",
+    "creationDate": 1587579904,
+    "language": {
+        "id": 9,
+        "name": "sql"
+    },
+    "user": {
+        "id": 9,
+        "nickname": "ssqqll",
+        "password": "aaaaaaaa"
+    }
+}]

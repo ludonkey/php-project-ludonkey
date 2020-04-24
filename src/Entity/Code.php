@@ -4,6 +4,7 @@ namespace Entity;
 
 use Entity\User;
 use Entity\Language;
+use framework\Utils\Serializer;
 
 class Code
 {
@@ -14,4 +15,5 @@ class Code
     public $creationDate;
     public Language $language;
     public User $user;
+    use Serializer;
 }

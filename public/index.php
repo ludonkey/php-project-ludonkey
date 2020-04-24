@@ -1,79 +1,11 @@
 <?php
 
-use Entity\Code;
-use Entity\User;
-use Entity\Language;
+use Repository\CodeRepository;
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-$langCPP = new Language();
-$langCPP->id = 1;
-$langCPP->name = "cpp";
-
-$userLudk = new User();
-$userLudk->id = 1;
-$userLudk->nickname = "ludk";
-$userLudk->password = "aaaaaaaa";
-
-$code1 = new Code();
-$code1->id = 1;
-$code1->title = "Hello World";
-$code1->content = '#include <iostream>
-int main() {
-    std::cout << "Hello World!";
-    return 0;
-}';
-$code1->description = "The famous Helloworld in C++.";
-$code1->creationDate = time();
-$code1->language = $langCPP;
-$code1->user = $userLudk;
-
-//===========================================================
-
-$langPHP = new Language();
-$langPHP->id = 2;
-$langPHP->name = "php";
-
-$userSomeone = new User();
-$userSomeone->id = 2;
-$userSomeone->nickname = "someone";
-$userSomeone->password = "aaaaaaaa";
-
-$code2 = new Code();
-$code2->id = 2;
-$code2->title = "Foreach Loop";
-$code2->content = '<?php
-foreach ($array as $key => $value) 
-    echo "$key : $value.\\n";
-}';
-$code2->description = "A simple foreach example.";
-$code2->creationDate = time();
-$code2->language = $langPHP;
-$code2->user = $userSomeone;
-
-//===========================================================
-
-$langSH = new Language();
-$langSH->id = 3;
-$langSH->name = "sh";
-
-$userLinn = new User();
-$userLinn->id = 3;
-$userLinn->nickname = "linn489";
-$userLinn->password = "aaaaaaaa";
-
-$code3 = new Code();
-$code3->id = 3;
-$code3->title = "Check os version";
-$code3->content = '$ cat /etc/os-release';
-$code3->description = "The easy way to check you os version.";
-$code3->creationDate = time();
-$code3->language = $langSH;
-$code3->user = $userLinn;
-
-//===========================================================
-
-$items = array($code1, $code2, $code3, $code2, $code3, $code1, $code3, $code1, $code2);
+$codeRepo = new CodeRepository();
+$items = $codeRepo->findAll();
 $oneColumnItemNumber = ceil(count($items) / 3);
 
 ?>
