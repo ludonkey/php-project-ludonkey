@@ -1,12 +1,19 @@
 <?php
 
-use Repository\CodeRepository;
+use Entity\Code;
+use ludk\Persistence\ORM;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$codeRepo = new CodeRepository();
-$items = $codeRepo->findAll();
-$oneColumnItemNumber = ceil(count($items) / 3);
+$orm = new ORM(__DIR__ . '/../Resources');
+$codeRepo = $orm->getRepository(Code::class);
+
+$items = array();
+if (isset($_GET['search'])) {
+    $items = $codeRepo->findBy(array("content" => $_GET['search']));
+} else {
+    $items = $codeRepo->findAll();
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,7 +33,7 @@ $oneColumnItemNumber = ceil(count($items) / 3);
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class=" container">
-            <a class="navbar-brand" href="#">[[ ShareCode ]]</a>
+            <a class="navbar-brand" href="/">[[ ShareCode ]]</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
                 aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,6 +58,7 @@ $oneColumnItemNumber = ceil(count($items) / 3);
         <div class="row masonry-grid">
             <div class="col-md-6 col-lg-4 masonry-column">
                 <?php
+                $oneColumnItemNumber = ceil(count($items) / 3);
                 $itemNumber = 0;
                 foreach ($items as $oneCode) {
                 ?>
