@@ -4,7 +4,7 @@ namespace Entity;
 
 use Entity\User;
 use Entity\Language;
-use framework\Utils\Serializer;
+use ludk\Utils\Serializer;
 
 class Code
 {
