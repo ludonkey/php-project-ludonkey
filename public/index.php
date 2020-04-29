@@ -59,7 +59,8 @@ if (isset($_GET['search'])) {
                     <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search"
                         value="<?= $_GET['search'] ?? ""; ?>">
                 </form>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="login-btn">Log
+                <a href="#" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#loginModal"
+                    role="button" aria-pressed="true" id="login-btn">Log
                     in</a>
                 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
                     id="signup-btn">Sign up</a>
@@ -106,6 +107,32 @@ if (isset($_GET['search'])) {
                     $itemNumber++;
                 }
                 ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/login" type="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Your username:</label>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password:</label>
+                        <input type="password" id="defaultForm-pass" class="form-control validate">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

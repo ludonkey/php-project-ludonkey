@@ -97,6 +97,10 @@ hr {
     border-color: transparent;
 }
 
+#loginModal {
+    color: black;
+}
+
 .lg-cpp {
     background-color: #ffc107;
 }
