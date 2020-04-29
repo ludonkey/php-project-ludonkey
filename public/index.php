@@ -61,6 +61,9 @@ if (isset($_GET['search'])) {
                 $oneColumnItemNumber = ceil(count($items) / 3);
                 $itemNumber = 0;
                 foreach ($items as $oneCode) {
+                    if ($itemNumber > 0 && ($itemNumber % $oneColumnItemNumber) == 0) {
+                        echo '</div><div class="col-md-6 col-lg-4 masonry-column">';
+                    }
                 ?>
                 <div class="card card-block">
                     <div class="card-body">
@@ -84,9 +87,6 @@ if (isset($_GET['search'])) {
                 </div>
                 <?php
                     $itemNumber++;
-                    if (($itemNumber % $oneColumnItemNumber) == 0) {
-                        echo '</div><div class="col-md-6 col-lg-4 masonry-column">';
-                    }
                 }
                 ?>
             </div>
