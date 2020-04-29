@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ludonkey/tinymvc.git",
-                "reference": "f4eb8c893458472301449b88998820101bd14f2d"
+                "reference": "30fd10a4cd13dc1b3555a416492ba9650cbbf474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ludonkey/tinymvc/zipball/f4eb8c893458472301449b88998820101bd14f2d",
-                "reference": "f4eb8c893458472301449b88998820101bd14f2d",
+                "url": "https://api.github.com/repos/ludonkey/tinymvc/zipball/30fd10a4cd13dc1b3555a416492ba9650cbbf474",
+                "reference": "30fd10a4cd13dc1b3555a416492ba9650cbbf474",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
             ],
             "description": "A  light weight MVC implementation",
             "homepage": "https://github.com/ludonkey/tinymvc",
-            "time": "2020-04-29T12:14:06+00:00"
+            "time": "2020-04-29T17:52:43+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

@@ -88,6 +88,10 @@ hr {
     border-top: 2px solid #515458;
 }
 
+.no-result {
+    color: black;
+}
+
 #signup-btn {
     background-color: #e83e8c;
     border-color: transparent;
