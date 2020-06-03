@@ -6,6 +6,8 @@
 </script>
 <script src="js/highlight.pack.js"></script>
 <script src="js/script.js"></script>
+<script src="js/clipboard.min.js"></script>
 <script>
     hljs.initHighlightingOnLoad();
+    new ClipboardJS('.btn');
 </script>
