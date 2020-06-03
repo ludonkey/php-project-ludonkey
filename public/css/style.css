@@ -98,6 +98,16 @@ hr {
     border-color: transparent;
 }
 
+#new-btn {
+    background-color: #e83e8c;
+    border-color: transparent;
+    font-weight: bold;
+}
+
+form.form-new textarea.form-control {
+    height: 200px;
+}
+
 #login {
     color: black;
 }

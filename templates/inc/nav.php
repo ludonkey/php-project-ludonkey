@@ -16,6 +16,7 @@
             if (isset($_SESSION['user'])) {
             ?>
                 <a href="?action=logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="logout-btn">Logout</a>
+                <a href="?action=new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="new-btn">+</a>
             <?php
             } else {
             ?>

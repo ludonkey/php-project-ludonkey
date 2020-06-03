@@ -21,7 +21,7 @@ include "inc/head.php";
                                 echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
                             }
                             ?>
-                            <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                            <h5>Register</h5>
                         </p>
                         <p>
                             <label>Your username:</label>
