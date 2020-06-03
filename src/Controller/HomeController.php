@@ -2,16 +2,24 @@
 
 namespace Controller;
 
-class HomeController
+use Entity\Code;
+use Entity\User;
+use Entity\Language;
+use ludk\Http\Request;
+use ludk\Http\Response;
+use ludk\Controller\AbstractController;
+
+class HomeController extends AbstractController
 {
-    public function display()
+    public function display(Request $request): Response
     {
-        global $languageRepo;
-        global $codeRepo;
-        global $userRepo;
+        $languageRepo = $this->getOrm()->getRepository(Language::class);
+        $codeRepo = $this->getOrm()->getRepository(Code::class);
+        $userRepo = $this->getOrm()->getRepository(User::class);
+
         $items = array();
-        if (isset($_GET['search'])) {
-            $strToSearch = $_GET['search'];
+        if ($request->query->has('search')) {
+            $strToSearch = $request->query->get('search');
             if (strpos($strToSearch, "#") === 0) {
                 $languageName = substr($strToSearch, 1);
                 $languages = $languageRepo->findBy(array("name" => $languageName));
@@ -30,6 +38,10 @@ class HomeController
         } else {
             $items = $codeRepo->findAll();
         }
-        include "../templates/display.php";
+        $data = array(
+            "isLogged" => $request->getSession()->has('user'),
+            "items" => $items
+        );
+        return $this->render('display.php', $data);
     }
 }

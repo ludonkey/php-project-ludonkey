@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ludonkey/tinymvc.git",
-                "reference": "1fb98256b3191e7fbe9cac0ce570ef7b6686a127"
+                "reference": "27e998607f219d7e1cb7ef3e19065c2204a3b6d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ludonkey/tinymvc/zipball/1fb98256b3191e7fbe9cac0ce570ef7b6686a127",
-                "reference": "1fb98256b3191e7fbe9cac0ce570ef7b6686a127",
+                "url": "https://api.github.com/repos/ludonkey/tinymvc/zipball/27e998607f219d7e1cb7ef3e19065c2204a3b6d4",
+                "reference": "27e998607f219d7e1cb7ef3e19065c2204a3b6d4",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
             ],
             "description": "A  light weight MVC implementation",
             "homepage": "https://github.com/ludonkey/tinymvc",
-            "time": "2020-06-03T08:41:24+00:00"
+            "time": "2020-06-04T11:19:14+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",

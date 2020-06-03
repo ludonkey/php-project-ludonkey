@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-include "inc/head.php";
-?>
+{% include 'inc/head.php' %}
 
 <body>
-    <?php
-    include "inc/nav.php";
-    ?>
+
+    {% include 'inc/nav.php' %}
 
     <div class="container">
         <div class="row">
@@ -31,17 +28,17 @@ include "inc/head.php";
                                 foreach ($languages as $oneLanguage) {
                                     $languageId = $oneLanguage->id;
                                     $languageName = $oneLanguage->name;
-                                    $selected = ($_POST['language'] ?? "") == $languageId ? "selected" : "";
+                                    $selected = $language == $languageId ? "selected" : "";
                                     echo "<option value=\"$languageId\" $selected>$languageName</option>";
                                 }
                                 ?>
                             </select>
                             <label>Title:</label>
-                            <input type="text" name="title" class="form-control" placeholder="Title" value="<?= $_POST['title'] ?? "" ?>">
+                            <input type="text" name="title" class="form-control" placeholder="Title" value="{{ title }}">
                             <label>Description:</label>
-                            <input type="text" name="description" class="form-control" placeholder="Description" value="<?= $_POST['description'] ?? "" ?>">
+                            <input type="text" name="description" class="form-control" placeholder="Description" value="{{ description }}">
                             <label>Content:</label>
-                            <textarea row=8 name="content" class="form-control" placeholder="// Your code here"><?= $_POST['content'] ?? "" ?></textarea>
+                            <textarea row=8 name="content" class="form-control" placeholder="// Your code here">{{ content }}</textarea>
                         </p>
                         <p>
                             <button type="submit" class="btn btn-lg btn-primary btn-block">Create</button>
@@ -52,9 +49,7 @@ include "inc/head.php";
         </div>
     </div>
 
-    <?php
-    include "inc/footer.php";
-    ?>
+    {% include 'inc/footer.php' %}
 
 </body>
 

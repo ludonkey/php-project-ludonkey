@@ -3,49 +3,72 @@
 namespace Controller;
 
 use Entity\Code;
+use Entity\Language;
+use ludk\Http\Request;
+use ludk\Http\Response;
+use ludk\Controller\AbstractController;
 
-class ContentController
+class ContentController extends AbstractController
 {
-    public function create()
+    public function create(Request $request): Response
     {
-        global $languageRepo;
-        global $manager;
+        $languageRepo = $this->getOrm()->getRepository(Language::class);
+        $manager = $this->getOrm()->getManager();
 
-        if (!isset($_SESSION['user'])) {
-            header('Location:/display');
+        if (!$request->getSession()->has('user')) {
+            return $this->redirectToRoute('display');
         } else {
             $languages = $languageRepo->findAll();
             if (
-                isset($_POST['language']) && isset($_POST['title'])
-                && isset($_POST['description']) && isset($_POST['content'])
+                $request->request->has('language') &&
+                $request->request->has('title') &&
+                $request->request->has('description') &&
+                $request->request->has('content')
             ) {
                 $errorMsg = NULL;
-                if ($_POST['language'] == "0") {
+                if ($request->request->get('language') == "0") {
                     $errorMsg = "Choose a language.";
-                } else if (empty($_POST['title'])) {
+                } else if (empty($request->request->get('title'))) {
                     $errorMsg = "Put a title.";
-                } else if (empty($_POST['description'])) {
+                } else if (empty($request->request->get('description'))) {
                     $errorMsg = "Put a description.";
-                } else if (empty($_POST['content'])) {
+                } else if (empty($request->request->get('content'))) {
                     $errorMsg = "Put a content.";
                 }
                 if ($errorMsg) {
-                    include "../templates/new.php";
+                    $data = array(
+                        "errorMsg" => $errorMsg,
+                        "languages" => $languages,
+                        "language" => $request->request->get('language', ''),
+                        "title" => $request->request->get('title', ''),
+                        "description" => $request->request->get('description', ''),
+                        "content" => $request->request->get('content', ''),
+                        "isLogged" => $request->getSession()->has('user')
+                    );
+                    return $this->render('new.php', $data);
                 } else {
-                    $lang = $languageRepo->find($_POST['language']);
+                    $lang = $languageRepo->find($request->request->get('language'));
                     $newCode = new Code();
-                    $newCode->title = $_POST['title'];
-                    $newCode->description = $_POST['description'];
-                    $newCode->content = $_POST['content'];
+                    $newCode->title = $request->request->get('title');
+                    $newCode->description = $request->request->get('description');
+                    $newCode->content = $request->request->get('content');
                     $newCode->creationDate = time();
                     $newCode->language = $lang;
-                    $newCode->user = $_SESSION['user'];
+                    $newCode->user = $request->getSession()->get('user');
                     $manager->persist($newCode);
                     $manager->flush();
-                    header('Location:/display');
+                    return $this->redirectToRoute('display');
                 }
             } else {
-                include "../templates/new.php";
+                $data = array(
+                    "languages" => $languages,
+                    "language" => $request->request->get('language', ''),
+                    "title" => $request->request->get('title', ''),
+                    "description" => $request->request->get('description', ''),
+                    "content" => $request->request->get('content', ''),
+                    "isLogged" => $request->getSession()->has('user')
+                );
+                return $this->render('new.php', $data);
             }
         }
     }

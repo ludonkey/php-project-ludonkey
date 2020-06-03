@@ -13,7 +13,7 @@
                 <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search" value="<?= $_GET['search'] ?? ""; ?>">
             </form>
             <?php
-            if (isset($_SESSION['user'])) {
+            if ($isLogged) {
             ?>
                 <a href="/logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="logout-btn">Logout</a>
                 <a href="/new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="new-btn">+</a>
