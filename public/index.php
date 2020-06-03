@@ -1,165 +1,70 @@
 <?php
 
+use ludk\Persistence\ORM;
 use Entity\Code;
 use Entity\Language;
 use Entity\User;
-use ludk\Persistence\ORM;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+session_start();
+
 $orm = new ORM(__DIR__ . '/../Resources');
+$manager = $orm->getManager();
+$userRepo = $orm->getRepository(User::class);
 $codeRepo = $orm->getRepository(Code::class);
+$languageRepo = $orm->getRepository(Language::class);
 
-$items = array();
+$action = $_GET["action"] ?? "display";
+switch ($action) {
+    case 'register':
+        break;
+    case 'logout':
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        }
+        header('Location:/?action=display');
+        break;
 
-if (isset($_GET['search'])) {
-    $strToSearch = $_GET['search'];
-    if (strpos($strToSearch, "#") === 0) {
-        $languageName = substr($strToSearch, 1);
-        $languageRepo = $orm->getRepository(Language::class);
-        $languages = $languageRepo->findBy(array("name" => $languageName));
-        if (count($languages) == 1) {
-            $items = $codeRepo->findBy(array("language" => $languages[0]->id));
+    case 'login':
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $users = $userRepo->findBy(array("nickname" => $_POST['username'], "password" => $_POST['password']));
+            if (count($users) == 1) {
+                $_SESSION['user'] = $users[0];
+                header('Location:/?action=display');
+            } else {
+                $errorMsg = "Wrong login and/or password.";
+                include "../templates/login.php";
+            }
+        } else {
+            include "../templates/login.php";
         }
-    } else if (strpos($strToSearch, "@") === 0) {
-        $userName = substr($strToSearch, 1);
-        $userRepo = $orm->getRepository(User::class);
-        $users = $userRepo->findBy(array("nickname" => $userName));
-        if (count($users) == 1) {
-            $items = $codeRepo->findBy(array("user" => $users[0]->id));
+        break;
+    case 'new':
+        break;
+    case 'display':
+    default:
+        $items = array();
+        if (isset($_GET['search'])) {
+            $strToSearch = $_GET['search'];
+            if (strpos($strToSearch, "#") === 0) {
+                $languageName = substr($strToSearch, 1);
+                $languages = $languageRepo->findBy(array("name" => $languageName));
+                if (count($languages) == 1) {
+                    $items = $codeRepo->findBy(array("language" => $languages[0]->id));
+                }
+            } else if (strpos($strToSearch, "@") === 0) {
+                $userName = substr($strToSearch, 1);
+                $users = $userRepo->findBy(array("nickname" => $userName));
+                if (count($users) == 1) {
+                    $items = $codeRepo->findBy(array("user" => $users[0]->id));
+                }
+            } else {
+                $items = $codeRepo->findBy(array("content" => $strToSearch));
+            }
+        } else {
+            $items = $codeRepo->findAll();
         }
-    } else {
-        $items = $codeRepo->findBy(array("content" => $strToSearch));
-    }
-} else {
-    $items = $codeRepo->findAll();
+        include "../templates/display.php";
+        break;
 }
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareCode</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles/dracula.css">
-    <link rel="stylesheet" href="css/style.css?time=<?= time(); ?>">
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div class=" container">
-            <a class="navbar-brand" href="/">[[ ShareCode ]]</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
-                aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExample07">
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-                <form class="form-inline my-2 my-md-0" action="/search" id="search-form">
-                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search"
-                        value="<?= $_GET['search'] ?? ""; ?>">
-                </form>
-                <a href="#" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#loginModal"
-                    role="button" aria-pressed="true" id="login-btn">Log
-                    in</a>
-                <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
-                    id="signup-btn">Sign up</a>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-
-        <div class="row masonry-grid">
-            <div class="col-md-6 col-lg-4 masonry-column">
-                <?php
-                if (count($items) == 0) {
-                    echo '<p class="no-result">No result.</p>';
-                }
-                $oneColumnItemNumber = ceil(count($items) / 3);
-                $itemNumber = 0;
-                foreach ($items as $oneCode) {
-                    if ($itemNumber > 0 && ($itemNumber % $oneColumnItemNumber) == 0) {
-                        echo '</div><div class="col-md-6 col-lg-4 masonry-column">';
-                    }
-                ?>
-                <div class="card card-block">
-                    <div class="card-body">
-                        <h5 class="card-title"><svg width="16" height="16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M15 6.675l-1.8-.6c-.2-.1-.3-.3-.2-.4l.9-1.7c.6-1.2-.7-2.5-1.9-1.9l-1.7.9c-.1.1-.3 0-.4-.2l-.6-1.8c-.4-1.3-2.2-1.3-2.6 0l-.6 1.8c-.1.2-.3.3-.4.2l-1.7-.9c-1.2-.6-2.5.7-1.9 1.9l.9 1.7c.1.1 0 .3-.2.4l-1.8.6c-1.3.4-1.3 2.3 0 2.7l1.8.6c.2 0 .3.2.2.3l-.9 1.7c-.6 1.2.7 2.5 1.9 1.9l1.7-.9c.2-.1.4 0 .4.2l.6 1.8c.4 1.3 2.3 1.3 2.7 0l.6-1.8c.1-.2.3-.3.4-.2l1.7.9c1.2.6 2.5-.7 1.9-1.9l-1-1.7c-.1-.2 0-.4.2-.4l1.8-.6c1.3-.4 1.3-2.2 0-2.6zm-7 3.7c-1.3 0-2.4-1.1-2.4-2.4 0-1.3 1.1-2.4 2.4-2.4 1.3 0 2.4 1.1 2.4 2.4 0 1.3-1.1 2.4-2.4 2.4z"
-                                    fill="#CCC"></path>
-                            </svg> <?= $oneCode->title ?> <a
-                                href="/search?search=%23<?= $oneCode->language->name ?>"><span
-                                    class="badge badge-secondary lg-<?= $oneCode->language->name ?>">
-                                    #<?= strtoupper($oneCode->language->name) ?></span></a></h5>
-                        <pre><code class="<?= $oneCode->language->name ?>"><?= htmlentities($oneCode->content) ?></code></pre>
-                        <hr />
-                        <p class="card-text">
-                            <?= $oneCode->description ?>
-                            <footer class="blockquote-footer"><a
-                                    href="/search?search=%40<?= $oneCode->user->nickname ?>"
-                                    class="text-decoration-none">@<?= $oneCode->user->nickname ?></a></footer>
-                        </p>
-                        <a href="#<?= $oneCode->id ?>" class="btn btn-primary btn-cpy">Copy</a>
-                    </div>
-                </div>
-                <?php
-                    $itemNumber++;
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="/login" type="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label>Your username:</label>
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password:</label>
-                        <input type="password" id="defaultForm-pass" class="form-control validate">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="js/highlight.pack.js"></script>
-    <script src="js/script.js"></script>
-    <script>
-    hljs.initHighlightingOnLoad();
-    </script>
-</body>
-
-</html>
