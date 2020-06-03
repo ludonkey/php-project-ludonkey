@@ -15,13 +15,13 @@
             <?php
             if (isset($_SESSION['user'])) {
             ?>
-                <a href="?action=logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="logout-btn">Logout</a>
-                <a href="?action=new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="new-btn">+</a>
+                <a href="/logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="logout-btn">Logout</a>
+                <a href="/new" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="new-btn">+</a>
             <?php
             } else {
             ?>
-                <a href="?action=login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="login-btn">Log in</a>
-                <a href="?action=register" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="signup-btn">Sign up</a>
+                <a href="/login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="login-btn">Log in</a>
+                <a href="/register" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" id="signup-btn">Sign up</a>
             <?php
             }
             ?>
