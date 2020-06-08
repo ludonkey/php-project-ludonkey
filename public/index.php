@@ -29,7 +29,7 @@ if (isset($_GET['search'])) {
             $items = $codeRepo->findBy(array("user" => $users[0]->id));
         }
     } else {
-        $items = $codeRepo->findBy(array("content" => $strToSearch));
+        $items = $codeRepo->findBy(array("content" => "%$strToSearch%"));
     }
 } else {
     $items = $codeRepo->findAll();
