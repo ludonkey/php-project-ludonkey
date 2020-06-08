@@ -10,7 +10,7 @@ $codeRepo = $orm->getRepository(Code::class);
 
 $items = array();
 if (isset($_GET['search'])) {
-    $items = $codeRepo->findBy(array("content" => $_GET['search']));
+    $items = $codeRepo->findBy(array("content" => '%' . $_GET['search'] . '%'));
 } else {
     $items = $codeRepo->findAll();
 }
