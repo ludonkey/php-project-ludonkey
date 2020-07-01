@@ -1,6 +1,6 @@
 # [[ Share Code ]]
 
-url:  https://dry-mesa-21337.herokuapp.com/
+url:  https://sharecode-tinymvc.herokuapp.com/
 
 ## Description
 
